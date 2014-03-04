@@ -12,7 +12,8 @@ import com.badlogic.gdx.graphics.Color;
  * display something with the library
  * 
  * @author Pierre-Andr√© Mudry (mui)
- * @version 1.0
+ * @author Christopher MÈtrailler (mei)
+ * @version 1.1
  */
 public class DemoSimpleShapes extends PortableApplication{
 
@@ -28,6 +29,7 @@ public class DemoSimpleShapes extends PortableApplication{
 	@Override
 	public void onGraphicRender(GdxGraphics g) {	
 		g.clear();
+		g.setPenWidth(1);
 		
 		// Draws a yellow circle
 		g.setColor(Color.YELLOW);
@@ -40,15 +42,19 @@ public class DemoSimpleShapes extends PortableApplication{
 		g.drawFilledCircle(50, 50, 20, Color.PINK);
 		g.drawFilledRectangle(80, 30, 20, 20, 0, new Color(0.5f, 0.5f, 0.5f, 0.5f));
 		
-		// Draws a blue polygon
+		// Draws a blue polygon with borders (point in clockwise order)
 		Vector2D points[] = {
 				new Vector2D(200, 200),
 				new Vector2D(250, 250),
-				new Vector2D(300, 200)				
+				new Vector2D(300, 200),
+				new Vector2D(250, 150),
 		};
-		
 		Polygon p = new Polygon(points);
-		g.drawFilledPolygon(p, Color.BLUE);				
+		g.drawFilledPolygon(p, Color.BLUE);
+		
+		g.setColor(Color.RED);
+		g.setPenWidth(10);
+		g.drawPolygon(p);
 	}
 		
 	public static void main(String args[]){

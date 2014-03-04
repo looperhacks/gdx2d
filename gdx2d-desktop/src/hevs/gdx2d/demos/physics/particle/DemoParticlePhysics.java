@@ -13,6 +13,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 
 /**
  * Demo for particle physics. There are no collisions in the physics and
@@ -30,6 +31,7 @@ public class DemoParticlePhysics extends PortableApplication {
 	public int CREATION_RATE = 3;
 	public final int MAX_AGE = 35;
 	Vector2 position;
+	Array<Body> bodies = new Array<Body>();
 
 	@Override
 	public void onInit() {
@@ -44,7 +46,8 @@ public class DemoParticlePhysics extends PortableApplication {
 	public void onGraphicRender(GdxGraphics g) {
 		g.clear();
  
-		Iterator<Body> it = world.getBodies();
+		world.getBodies(bodies);
+		Iterator<Body> it = bodies.iterator();
 
 		while (it.hasNext()) {
 			Body p = it.next();

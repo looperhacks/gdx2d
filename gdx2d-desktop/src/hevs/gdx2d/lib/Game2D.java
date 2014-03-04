@@ -110,6 +110,12 @@ public class Game2D implements ApplicationListener {
 				app.onFling(velocityX, velocityY, button);
 				return false;
 			}
+
+			@Override
+			public boolean panStop(float x, float y, int pointer, int button) {
+				app.onPanStop(x, y, pointer, button);
+				return false;
+			}
 		}));
 
 		multiplexer.addProcessor(new InputProcessor() {

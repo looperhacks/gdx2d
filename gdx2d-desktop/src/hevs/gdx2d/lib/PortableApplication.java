@@ -45,6 +45,8 @@ public abstract class PortableApplication implements TouchInterface,
 		if (Gdx.app.getType() == ApplicationType.Android)
 			Gdx.app.log("Warning", "Title can not be set on Android");
 
+		// FIXME: does not work correctly on Linux (ex: in Unity). 
+		// The title of the windows is OK, but on the top of the screen.
 		Gdx.graphics.setTitle(title);
 	}
 
@@ -150,6 +152,18 @@ public abstract class PortableApplication implements TouchInterface,
 	public void onPan(float x, float y, float deltaX, float deltaY) {	
 		
 	}
+	
+	/**
+	 * Invoked for a pan gesture on Android (see {@link GestureListener}).
+	 * Called when no longer panning. 
+	 * @param x
+	 * @param y
+	 * @param pointer
+	 * @param button
+	 */
+	public void onPanStop(float x, float y, int pointer, int button) {
+		
+	}
 		
 	/**
 	 * Invoked for a long press on Android (see {@link GestureListener})
@@ -227,11 +241,13 @@ public abstract class PortableApplication implements TouchInterface,
 			
 			LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 			config.resizable = false;
-			config.useGL20 = true;
+			// config.useGL20 = true;
 			config.height = height;
 			config.width = width;
 			config.fullscreen = false;
-			config.title = "gdx2d application";
+			// Application title must be set here
+			// (not display correctly on Linux if setTitle method is used)
+			config.title = "title";
 			config.vSyncEnabled = true; // Ignored under Linux						
 			config.foregroundFPS = 60; // Target value if vSync not working
 			config.backgroundFPS = config.foregroundFPS;
@@ -255,6 +271,7 @@ public abstract class PortableApplication implements TouchInterface,
 	 * @param onAndroid True if running on Android
 	 */
 	public PortableApplication(boolean onAndroid) {
+		// "gdx2d application"
 		this(onAndroid, DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	}
 }

@@ -516,12 +516,12 @@ public class GdxGraphics implements Disposable
 		shapeRenderer.polygon(p.getVertices());
 	}
 
-	public void drawFilledPolygon(Polygon polygon, Color c) {		
+	public void drawFilledPolygon(Polygon polygon, Color c) {	
 		float[] vertices =  polygon.getEarClippedVertices();
 		checkmode(t_rendering_mode.SHAPE_FILLED);
 		shapeRenderer.setColor(c);
 		shapeRenderer.identity();
-
+		
 		for (int i = 0; i < vertices.length; i+=6) {
 			shapeRenderer.triangle(vertices[i], vertices[i+1], vertices[i+2], vertices[i+3], vertices[i+4], vertices[i+5]);
 		}		
